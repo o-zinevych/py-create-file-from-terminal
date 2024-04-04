@@ -6,7 +6,7 @@ terminal_data = sys.argv
 
 
 def make_directories(dirs: list) -> None:
-    return os.makedirs(os.path.join(*dirs))
+    return os.makedirs(os.path.join(*dirs), exist_ok=True)
 
 
 def input_file_contents(path_name: str) -> None:
