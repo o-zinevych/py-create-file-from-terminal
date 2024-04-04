@@ -18,17 +18,25 @@ def input_file_contents(path_name: str) -> None:
             line_num += 1
             content = input("Enter content line: ")
             if content == "stop":
-                file.write("\n")
+                file.write("\n\n")
                 break
-            file.write(f"\n{line_num} {content}\n")
+            file.write(f"\n{line_num} {content}")
 
 
 if "-d" in terminal_data and "-f" in terminal_data:
-    directories = terminal_data[2:-2]
+    d_flag_index = terminal_data.index("-d")
+    f_flag_index = terminal_data.index("-f")
+    if f_flag_index > d_flag_index:
+        directories = terminal_data[2:-2]
+        file_name = terminal_data[-1]
+    else:
+        directories = terminal_data[d_flag_index + 1:]
+        file_name = terminal_data[2]
+
     make_directories(directories)
-    file_name = terminal_data[-1]
     joined_path = os.path.join(*directories, file_name)
     input_file_contents(joined_path)
+
 
 elif "-d" in terminal_data:
     directories = terminal_data[2:]
